@@ -68,7 +68,7 @@ class Notes{
     }
 }
 const NOTES = new Notes();
-class Scale{
+class Scale {
     constructor(name, steps){
         this.scales = [];
         this.name = name;
@@ -102,7 +102,6 @@ class Scale{
         }
     }
 }
-
 const major_scale = new Scale("major", "wwhwwwh");
 const minor_scale = new Scale("minor", "whwwhww");
 const harmonic_minor_scale = new Scale("harmonic minor", "whwwhoh");
@@ -121,4 +120,55 @@ const whole_tone_scale = new Scale("whole tone", "wwwwww");
 const diminished_scale = new Scale("diminshed", "whwhwhwh");
 const altered_dominant_scale = new Scale("altered dominant", "hwhwwww");
 const bebop_scale = new Scale("bebop", "wwhwwhhh");
+
+class Scales {
+    constructor(type){
+        this.scales = [];
+        this.name = type;
+    }
+    push(scale){
+        this.scales.push(scale);
+    }
+    get(note, scale){
+        for(let i = 0; i < this.scales.length; i++){
+            if(this.scales[i].name == scale){
+                return this.scales[i].get(note);
+            }
+        }
+        console.log("ERROR: Invalid note or " + this.name);
+    }
+    get_show(note, major){
+        for(let i = 0; i < this.scales.length; i++){
+            if(this.scales[i].name == major){
+                this.scales[i].get_show(note);
+                break;
+            }
+        }
+    }
+}
+
+var SCALES = new Scales("scale");
+SCALES.push(major_scale);
+SCALES.push(minor_scale);
+SCALES.push(harmonic_minor_scale);
+SCALES.push(melodic_minor_scale);
+SCALES.push(major_pentatonic_scale);
+SCALES.push(minor_pentatonic_scale);
+SCALES.push(dominant_pentatonic_scale);
+SCALES.push(dorian_mode_scale);
+SCALES.push(mixolydian_mode_scale);
+SCALES.push(lydian_mode_scale);
+SCALES.push(phrygian_mode_scale);
+SCALES.push(locrian_mode_scale);
+SCALES.push(blues_scale);
+SCALES.push(whole_tone_scale);
+SCALES.push(diminished_scale);
+SCALES.push(altered_dominant_scale);
+SCALES.push(bebop_scale);
+
+SCALES.get_show("C", "major pentatonic");
+
+
+
+
 
